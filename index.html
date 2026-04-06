@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Catatan Harian - Login</title>
+    <style>
+        /* Mengatur font bawaan dan reset margin */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Latar belakang untuk layar desktop (agar frame mobile berada di tengah) */
+        body {
+            background-color: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container utama yang mensimulasikan layar HP (iPhone 14 / Android Large) */
+        .mobile-frame {
+            background-color: #ffffff;
+            width: 390px;
+            height: 844px;
+            border-radius: 40px; /* Sudut HP membulat */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 1. IMAGE: Ilustrasi / Logo di bagian atas */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            width: 100px;
+            height: 100px;
+            background-color: #eff6ff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #3b82f6;
+        }
+        /* Menggunakan icon buku catatan sederhana dengan SVG */
+        .logo svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* 2 & 3. TEXT: Hierarki Visual (Headline dan Body Text) */
+        .header-text {
+            text-align: center;
+            margin-bottom: 40px; /* Spacing (Jarak) - Memberikan ruang bernapas */
+        }
+        .header-text h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+        .header-text p {
+            font-size: 15px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        /* 4. INPUT FIELD: Kotak Input */
+        .form-group {
+            margin-bottom: 20px; /* Spacing antar komponen */
+        }
+        .form-group input {
+            width: 100%;
+            padding: 16px;
+            font-size: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px; /* Interaksi Dasar: Sudut membulat */
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus {
+            border-color: #3b82f6; /* Konsistensi: Nuansa biru saat aktif */
+        }
+
+        /* 5. BUTTON: Tombol Utama */
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background-color: #3b82f6; /* Konsistensi: Warna senada (Biru) */
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px; /* Interaksi Dasar: Sudut membulat */
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-frame">
+        
+        <div class="logo-container">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="header-text">
+            <h1>Selamat Datang</h1>
+            <p>Silakan masuk untuk menulis catatanmu.</p>
+        </div>
+
+        <form action="#" method="POST">
+            <div class="form-group">
+                <input type="email" placeholder="Alamat Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Kata Sandi" required>
+            </div>
+            
+            <button type="submit" class="btn-primary">Masuk</button>
+        </form>
+
+    </div>
+
+</body>
+</html>
