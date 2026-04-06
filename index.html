@@ -13,7 +13,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Latar belakang untuk layar desktop (agar frame mobile berada di tengah) */
+        /* Latar belakang untuk layar desktop */
         body {
             background-color: #e2e8f0;
             display: flex;
@@ -22,12 +22,12 @@
             min-height: 100vh;
         }
 
-        /* Container utama yang mensimulasikan layar HP (iPhone 14 / Android Large) */
+        /* Container utama yang mensimulasikan layar HP */
         .mobile-frame {
             background-color: #ffffff;
             width: 390px;
             height: 844px;
-            border-radius: 40px; /* Sudut HP membulat */
+            border-radius: 40px; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             padding: 40px 30px;
             display: flex;
@@ -36,7 +36,7 @@
             overflow: hidden;
         }
 
-        /* 1. IMAGE: Ilustrasi / Logo di bagian atas */
+        /* 1. IMAGE: Ilustrasi / Logo */
         .logo-container {
             display: flex;
             justify-content: center;
@@ -53,16 +53,15 @@
             align-items: center;
             color: #3b82f6;
         }
-        /* Menggunakan icon buku catatan sederhana dengan SVG */
         .logo svg {
             width: 50px;
             height: 50px;
         }
 
-        /* 2 & 3. TEXT: Hierarki Visual (Headline dan Body Text) */
+        /* 2 & 3. TEXT: Hierarki Visual */
         .header-text {
             text-align: center;
-            margin-bottom: 40px; /* Spacing (Jarak) - Memberikan ruang bernapas */
+            margin-bottom: 40px; 
         }
         .header-text h1 {
             font-size: 28px;
@@ -78,31 +77,31 @@
 
         /* 4. INPUT FIELD: Kotak Input */
         .form-group {
-            margin-bottom: 20px; /* Spacing antar komponen */
+            margin-bottom: 20px; 
         }
         .form-group input {
             width: 100%;
             padding: 16px;
             font-size: 15px;
             border: 1px solid #cbd5e1;
-            border-radius: 12px; /* Interaksi Dasar: Sudut membulat */
+            border-radius: 12px; 
             outline: none;
             transition: border-color 0.3s;
         }
         .form-group input:focus {
-            border-color: #3b82f6; /* Konsistensi: Nuansa biru saat aktif */
+            border-color: #3b82f6; 
         }
 
         /* 5. BUTTON: Tombol Utama */
         .btn-primary {
             width: 100%;
             padding: 16px;
-            background-color: #3b82f6; /* Konsistensi: Warna senada (Biru) */
+            background-color: #3b82f6; 
             color: white;
             font-size: 16px;
             font-weight: 600;
             border: none;
-            border-radius: 12px; /* Interaksi Dasar: Sudut membulat */
+            border-radius: 12px; 
             cursor: pointer;
             margin-top: 10px;
             transition: background-color 0.3s;
@@ -129,7 +128,7 @@
             <p>Silakan masuk untuk menulis catatanmu.</p>
         </div>
 
-        <form action="#" method="POST">
+        <form onsubmit="langsungMasuk(event)">
             <div class="form-group">
                 <input type="email" placeholder="Alamat Email" required>
             </div>
@@ -141,6 +140,19 @@
         </form>
 
     </div>
+
+    <script>
+        function langsungMasuk(event) {
+            // Mencegah halaman refresh dan menghindari error 405
+            event.preventDefault(); 
+            
+            // Memunculkan notifikasi sukses
+            alert("Berhasil! Anda langsung masuk ke Aplikasi Catatan Harian.");
+            
+            // Opsional: Kosongkan form setelah ditekan
+            event.target.reset();
+        }
+    </script>
 
 </body>
 </html>
