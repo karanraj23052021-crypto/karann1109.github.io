@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Catatan Harian - Login</title>
+    <title>Aplikasi Catatan Harian</title>
     <style>
-        /* Mengatur font bawaan dan reset margin */
+        /* === PENGATURAN DASAR === */
         * {
             margin: 0;
             padding: 0;
@@ -13,7 +13,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Latar belakang untuk layar desktop */
         body {
             background-color: #e2e8f0;
             display: flex;
@@ -22,135 +21,227 @@
             min-height: 100vh;
         }
 
-        /* Container utama yang mensimulasikan layar HP */
+        /* Container utama HP */
         .mobile-frame {
             background-color: #ffffff;
             width: 390px;
             height: 844px;
-            border-radius: 40px; 
+            border-radius: 40px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Container untuk masing-masing halaman */
+        .page-view {
             padding: 40px 30px;
             display: flex;
             flex-direction: column;
-            position: relative;
-            overflow: hidden;
+            height: 100%;
+            transition: opacity 0.3s;
         }
 
-        /* 1. IMAGE: Ilustrasi / Logo */
-        .logo-container {
+        /* === HALAMAN LOGIN (CSS Lama) === */
+        .logo-container { display: flex; justify-content: center; margin-top: 40px; margin-bottom: 30px; }
+        .logo { width: 100px; height: 100px; background-color: #eff6ff; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #3b82f6; }
+        .logo svg { width: 50px; height: 50px; }
+        
+        .header-text { text-align: center; margin-bottom: 40px; }
+        .header-text h1 { font-size: 28px; font-weight: 700; color: #1e293b; margin-bottom: 10px; }
+        .header-text p { font-size: 15px; color: #64748b; line-height: 1.5; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group input { width: 100%; padding: 16px; font-size: 15px; border: 1px solid #cbd5e1; border-radius: 12px; outline: none; transition: border-color 0.3s; }
+        .form-group input:focus { border-color: #3b82f6; }
+
+        .btn-primary { width: 100%; padding: 16px; background-color: #3b82f6; color: white; font-size: 16px; font-weight: 600; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; transition: background-color 0.3s; }
+        .btn-primary:hover { background-color: #2563eb; }
+
+        /* === HALAMAN CATATAN (Fitur Baru) === */
+        #view-notes { display: none; padding: 40px 20px 20px 20px;}
+        
+        .nav-header {
             display: flex;
-            justify-content: center;
-            margin-top: 40px;
-            margin-bottom: 30px;
-        }
-        .logo {
-            width: 100px;
-            height: 100px;
-            background-color: #eff6ff;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            color: #3b82f6;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
         }
-        .logo svg {
-            width: 50px;
-            height: 50px;
+        .nav-header h2 { font-size: 22px; color: #1e293b; }
+        .btn-logout { background: none; border: none; color: #ef4444; font-weight: 600; cursor: pointer; font-size: 14px;}
+        
+        .note-input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
         }
-
-        /* 2 & 3. TEXT: Hierarki Visual */
-        .header-text {
-            text-align: center;
-            margin-bottom: 40px; 
-        }
-        .header-text h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 10px;
-        }
-        .header-text p {
-            font-size: 15px;
-            color: #64748b;
-            line-height: 1.5;
-        }
-
-        /* 4. INPUT FIELD: Kotak Input */
-        .form-group {
-            margin-bottom: 20px; 
-        }
-        .form-group input {
+        textarea {
             width: 100%;
-            padding: 16px;
-            font-size: 15px;
+            height: 100px;
+            padding: 15px;
+            border-radius: 12px;
             border: 1px solid #cbd5e1;
-            border-radius: 12px; 
+            font-size: 14px;
+            resize: none;
             outline: none;
-            transition: border-color 0.3s;
         }
-        .form-group input:focus {
-            border-color: #3b82f6; 
-        }
+        textarea:focus { border-color: #3b82f6; }
+        
+        .btn-save { background-color: #10b981; padding: 12px; color: white; font-weight: bold; border: none; border-radius: 12px; cursor: pointer; }
+        .btn-save:hover { background-color: #059669; }
 
-        /* 5. BUTTON: Tombol Utama */
-        .btn-primary {
-            width: 100%;
-            padding: 16px;
-            background-color: #3b82f6; 
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            border: none;
-            border-radius: 12px; 
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s;
+        .notes-list-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-bottom: 20px;
         }
-        .btn-primary:hover {
-            background-color: #2563eb;
+        
+        /* Hilangkan scrollbar agar estetik di HP */
+        .notes-list-container::-webkit-scrollbar { display: none; }
+        
+        .note-card {
+            background-color: #f8fafc;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            position: relative;
         }
+        .note-card p { font-size: 14px; color: #334155; line-height: 1.4; white-space: pre-wrap; margin-bottom: 5px; }
+        .note-date { font-size: 11px; color: #94a3b8; }
+        .btn-delete { position: absolute; top: 10px; right: 10px; background: none; border: none; color: #cbd5e1; cursor: pointer; font-size: 18px; }
+        .btn-delete:hover { color: #ef4444; }
+
     </style>
 </head>
 <body>
 
     <div class="mobile-frame">
         
-        <div class="logo-container">
-            <div class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                </svg>
+        <div id="view-login" class="page-view">
+            <div class="logo-container">
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                    </svg>
+                </div>
             </div>
+
+            <div class="header-text">
+                <h1>Selamat Datang</h1>
+                <p>Silakan masuk untuk menulis catatanmu.</p>
+            </div>
+
+            <form onsubmit="prosesLogin(event)">
+                <div class="form-group">
+                    <input type="email" placeholder="Alamat Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Kata Sandi" required>
+                </div>
+                <button type="submit" class="btn-primary">Masuk</button>
+            </form>
         </div>
 
-        <div class="header-text">
-            <h1>Selamat Datang</h1>
-            <p>Silakan masuk untuk menulis catatanmu.</p>
-        </div>
+        <div id="view-notes" class="page-view">
+            <div class="nav-header">
+                <h2>Catatanku</h2>
+                <button class="btn-logout" onclick="keluar()">Keluar</button>
+            </div>
 
-        <form onsubmit="langsungMasuk(event)">
-            <div class="form-group">
-                <input type="email" placeholder="Alamat Email" required>
+            <div class="note-input-container">
+                <textarea id="noteText" placeholder="Apa yang sedang kamu pikirkan?..."></textarea>
+                <button class="btn-save" onclick="tambahCatatan()">Simpan Catatan</button>
             </div>
-            <div class="form-group">
-                <input type="password" placeholder="Kata Sandi" required>
-            </div>
-            
-            <button type="submit" class="btn-primary">Masuk</button>
-        </form>
+
+            <div id="notesContainer" class="notes-list-container">
+                </div>
+        </div>
 
     </div>
 
     <script>
-        function langsungMasuk(event) {
-            // Mencegah halaman refresh dan menghindari error 405
-            event.preventDefault(); 
+        const viewLogin = document.getElementById('view-login');
+        const viewNotes = document.getElementById('view-notes');
+        const noteText = document.getElementById('noteText');
+        const notesContainer = document.getElementById('notesContainer');
+
+        // 1. Fungsi saat tombol login ditekan
+        function prosesLogin(event) {
+            event.preventDefault(); // Mencegah reload halaman
+            viewLogin.style.display = 'none'; // Sembunyikan form login
+            viewNotes.style.display = 'flex'; // Munculkan halaman catatan
+            tampilkanCatatan(); // Tampilkan catatan yang tersimpan
+        }
+
+        // 2. Fungsi saat tombol keluar ditekan
+        function keluar() {
+            viewNotes.style.display = 'none';
+            viewLogin.style.display = 'flex';
+        }
+
+        // 3. Fungsi untuk menyimpan catatan baru
+        function tambahCatatan() {
+            const teks = noteText.value.trim();
+            if (teks === "") {
+                alert("Catatan tidak boleh kosong!");
+                return;
+            }
+
+            // Ambil waktu saat ini
+            const tanggal = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit' });
+
+            // Ambil data lama dari LocalStorage, atau buat array baru jika masih kosong
+            let daftarCatatan = JSON.parse(localStorage.getItem('dataCatatan')) || [];
             
-            // Memunculkan notifikasi sukses
-            alert("Berhasil! Anda langsung masuk ke Aplikasi Catatan Harian.");
+            // Tambahkan catatan baru ke urutan paling atas
+            daftarCatatan.unshift({ teks: teks, waktu: tanggal });
+
+            // Simpan kembali ke LocalStorage
+            localStorage.setItem('dataCatatan', JSON.stringify(daftarCatatan));
+
+            noteText.value = ""; // Kosongkan form input
+            tampilkanCatatan(); // Refresh tampilan daftar catatan
+        }
+
+        // 4. Fungsi untuk memunculkan catatan ke layar
+        function tampilkanCatatan() {
+            // Bersihkan container dulu
+            notesContainer.innerHTML = "";
             
-            // Opsional: Kosongkan form setelah ditekan
-            event.target.reset();
+            let daftarCatatan = JSON.parse(localStorage.getItem('dataCatatan')) || [];
+
+            if(daftarCatatan.length === 0) {
+                notesContainer.innerHTML = '<p style="text-align:center; color:#94a3b8; font-size:14px; margin-top:20px;">Belum ada catatan. Buat yang pertama!</p>';
+                return;
+            }
+
+            // Looping dan buat elemen HTML untuk setiap catatan
+            daftarCatatan.forEach((catatan, index) => {
+                const card = document.createElement('div');
+                card.className = 'note-card';
+                card.innerHTML = `
+                    <p>${catatan.teks}</p>
+                    <span class="note-date">${catatan.waktu}</span>
+                    <button class="btn-delete" onclick="hapusCatatan(${index})">&times;</button>
+                `;
+                notesContainer.appendChild(card);
+            });
+        }
+
+        // 5. Fungsi untuk menghapus catatan
+        function hapusCatatan(index) {
+            let daftarCatatan = JSON.parse(localStorage.getItem('dataCatatan')) || [];
+            daftarCatatan.splice(index, 1); // Hapus 1 item sesuai urutan (index)
+            localStorage.setItem('dataCatatan', JSON.stringify(daftarCatatan)); // Simpan data terbaru
+            tampilkanCatatan(); // Refresh layar
         }
     </script>
 
