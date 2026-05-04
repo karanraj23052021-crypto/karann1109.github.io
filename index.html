@@ -45,6 +45,11 @@
             margin-bottom: 20px;
         }
 
+        .section-subtitle {
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
         /* Navigasi */
         nav {
             display: flex;
@@ -104,8 +109,14 @@
 
         .hero h1 {
             color: var(--primary-blue);
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 15px;
         }
 
         .btn {
@@ -117,6 +128,7 @@
             border-radius: 25px;
             font-weight: 700;
             transition: background 0.3s;
+            margin-top: 20px;
         }
 
         .btn:hover { background-color: var(--secondary-blue); }
@@ -126,6 +138,7 @@
         .about-text { flex: 1; }
         .about-image { flex: 1; max-width: 500px; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .about-image img { width: 100%; height: auto; display: block; }
+        .about-text p { margin-bottom: 15px; }
 
         /* Layouts & Colors */
         .bg-light-blue { background-color: var(--light-blue); }
@@ -144,6 +157,7 @@
         .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
         .card { background: var(--white); padding: 30px 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: left; }
         .card h4 { color: var(--primary-blue); margin-bottom: 15px; }
+        .card p { margin-bottom: 10px; }
 
         .service-row { display: flex; align-items: flex-start; gap: 30px; margin-top: 40px; text-align: left; }
         .service-group { flex: 1; display: flex; flex-direction: column; gap: 20px; }
@@ -157,15 +171,18 @@
 
         /* Footer & Contact */
         .contact-info { text-align: left; max-width: 400px; margin: 30px auto 0; background: var(--white); padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .contact-info p { margin-bottom: 10px; }
         .footer-buttons { display: flex; justify-content: center; gap: 20px; margin-top: 40px; }
-        .footer-btn { padding: 10px 20px; background-color: var(--primary-blue); color: var(--white); text-decoration: none; border-radius: 25px; font-weight: 600; }
+        .footer-btn { padding: 10px 20px; background-color: var(--primary-blue); color: var(--white); text-decoration: none; border-radius: 25px; font-weight: 600; display: flex; align-items: center; gap: 8px;}
         footer { background-color: var(--text-dark); color: var(--white); text-align: center; padding: 20px; }
 
         @media (max-width: 768px) {
-            nav { flex-direction: column; }
+            nav { flex-direction: column; padding: 15px; }
+            nav .nav-links { margin-top: 15px; flex-wrap: wrap; justify-content: center;}
             .hero h1 { font-size: 2rem; }
             .about-row, .service-row, .dual-col { flex-direction: column; }
             .grid-bubbles { grid-template-columns: repeat(2, 1fr); }
+            .bubble:last-child { grid-column: span 2; max-width: 200px; margin: 0 auto; }
             .footer-buttons { flex-direction: column; align-items: center; }
         }
     </style>
@@ -178,7 +195,7 @@
             <li><a href="#beranda">Beranda</a></li>
             <li><a href="#tentang">Tentang Kami</a></li>
             <li><a href="#layanan">Layanan</a></li>
-            <li><a href="#testimoni">Testimoni</a></li>
+            <li><a href="#keunggulan">Keunggulan</a></li>
             <li><a href="#kontak">Kontak</a></li>
         </ul>
     </nav>
@@ -186,7 +203,8 @@
     <section id="beranda" class="hero">
         <div class="hero-card">
             <h1>Selamat datang di Nala Homecare</h1>
-            <p>Layanan kesehatan berbasis kunjungan rumah yang praktis, aman, dan terpercaya. Kami mengedepankan profesionalisme untuk kualitas hidup Anda.</p>
+            <p>Nala Homecare merupakan layanan kesehatan berbasis kunjungan rumah (home care) yang hadir sebagai solusi praktis, aman, dan terpercaya bagi masyarakat yang membutuhkan perawatan tanpa harus datang ke fasilitas kesehatan. Kami memahami bahwa tidak semua kondisi memungkinkan pasien untuk bepergian, sehingga layanan kesehatan di rumah menjadi pilihan yang lebih nyaman dan efisien.</p>
+            <p>Dengan mengedepankan profesionalisme, ketepatan tindakan, serta pendekatan yang humanis, Nala Homecare berkomitmen untuk memberikan pelayanan terbaik demi menunjang kesehatan dan kualitas hidup pasien.</p>
             <a href="#layanan" class="btn">Lihat Layanan Kami</a>
         </div>
     </section>
@@ -195,10 +213,11 @@
         <div class="container about-row">
             <div class="about-text">
                 <h2>Tentang Kami</h2>
-                <p>Nala Homecare berfokus pada perawatan dasar yang aman dan efektif di rumah. Kami memperhatikan kenyamanan dan ketenangan setiap pasien untuk mendukung pemulihan fisik maupun psikologis.</p>
+                <p>Nala Homecare adalah penyedia layanan perawatan kesehatan di rumah yang berfokus pada tindakan perawatan dasar yang aman dan efektif. Kami berupaya memberikan pelayanan yang tidak hanya berorientasi pada tindakan medis, tetapi juga memperhatikan kenyamanan, ketenangan, serta kebutuhan individu setiap pasien.</p>
+                <p>Kami percaya bahwa proses perawatan yang dilakukan di lingkungan rumah dapat memberikan dampak positif terhadap pemulihan pasien, baik secara fisik maupun psikologis. Oleh karena itu, setiap layanan kami dilakukan dengan standar operasional yang jelas serta didukung oleh tenaga yang kompeten dan bertanggung jawab.</p>
             </div>
             <div class="about-image">
-                <img src="https://drive.google.com/uc?export=view&id=1xvzQHPwM9q5b_wy6JPBPh2iJSkJ-XPW8" alt="Tentang Kami">
+                <img src="https://drive.google.com/uc?export=view&id=1xvzQHPwM9q5b_wy6JPBPh2iJSkJ-XPW8" alt="Tentang Kami Nala Homecare">
             </div>
         </div>
     </section>
@@ -212,9 +231,10 @@
             <div class="misi">
                 <h3>Misi</h3>
                 <ul>
-                    <li>Layanan kesehatan aman dan sesuai standar.</li>
-                    <li>Mengutamakan kepuasan pasien.</li>
-                    <li>Akses layanan yang mudah bagi masyarakat.</li>
+                    <li>Memberikan pelayanan kesehatan yang aman, tepat, dan sesuai standar</li>
+                    <li>Mengutamakan kenyamanan dan kepuasan pasien</li>
+                    <li>Menyediakan layanan yang mudah diakses oleh masyarakat</li>
+                    <li>Meningkatkan kualitas pelayanan secara berkelanjutan</li>
                 </ul>
             </div>
         </div>
@@ -224,9 +244,9 @@
         <div class="container">
             <h3>Tim Kompeten dan Penuh Kasih Sayang</h3>
             <div class="grid-bubbles">
-                <div class="bubble"><img src="https://drive.google.com/uc?export=view&id=1Ed4vcdhmufwc9-WGUSspUG1ylgUzCOgD" alt="Tim 1"></div>
-                <div class="bubble"><img src="https://drive.google.com/uc?export=view&id=1s9thCsgu0H81LwZRMSech1kS3y4LoGeU" alt="Tim 2"></div>
-                <div class="bubble"><img src="https://drive.google.com/uc?export=view&id=152g3d-1EMgkhV_il-DZwFf3uYpJ9lAm_" alt="Tim 3"></div>
+                <div class="bubble"><img src="https://drive.google.com/uc?export=view&id=1Ed4vcdhmufwc9-WGUSspUG1ylgUzCOgD" alt="Pelayanan Pasien"></div>
+                <div class="bubble"><img src="https://drive.google.com/uc?export=view&id=1s9thCsgu0H81LwZRMSech1kS3y4LoGeU" alt="Perawat dan Pasien"></div>
+                <div class="bubble"><img src="https://drive.google.com/uc?export=view&id=152g3d-1EMgkhV_il-DZwFf3uYpJ9lAm_" alt="Pemeriksaan Kesehatan"></div>
             </div>
         </div>
     </section>
@@ -234,26 +254,38 @@
     <section id="layanan">
         <div class="container">
             <h2>Layanan Kami</h2>
+            <p class="section-subtitle">Kami menyediakan layanan terapi kompres yang dapat membantu mengurangi berbagai keluhan seperti nyeri, pembengkakan, serta peradangan.</p>
+            
             <div class="service-row">
                 <div class="service-group">
                     <div class="card">
-                        <h4>Kompres Hangat</h4>
-                        <p>Membantu melancarkan peredaran darah dan memberikan efek relaksasi pada kekakuan otot.</p>
+                        <h4>1. Kompres Hangat Basah</h4>
+                        <p>Digunakan untuk membantu melancarkan peredaran darah, mengurangi kekakuan otot, serta memberikan efek relaksasi pada area tubuh tertentu.</p>
+                    </div>
+                    <div class="card">
+                        <h4>2. Kompres Hangat Kering</h4>
+                        <p>Berfungsi untuk meredakan ketegangan otot dan memberikan kenyamanan, terutama pada kondisi nyeri ringan hingga sedang.</p>
                     </div>
                     <div class="service-image">
-                        <img src="https://drive.google.com/uc?export=view&id=1rLoKxmFsG1ZOODF6L3YW5QPb0yjUePhE" alt="Layanan 1">
+                        <img src="https://drive.google.com/uc?export=view&id=1rLoKxmFsG1ZOODF6L3YW5QPb0yjUePhE" alt="Layanan Kompres Hangat">
                     </div>
                 </div>
                 <div class="service-group">
                     <div class="service-image">
-                        <img src="https://drive.google.com/uc?export=view&id=1HqoqEuxP4HLDw-EV80D9MpIL-jc6G7X-" alt="Layanan 2">
+                        <img src="https://drive.google.com/uc?export=view&id=1HqoqEuxP4HLDw-EV80D9MpIL-jc6G7X-" alt="Layanan Kompres Dingin">
                     </div>
                     <div class="card">
-                        <h4>Kompres Dingin</h4>
-                        <p>Mengurangi pembengkakan dan peradangan pada nyeri akut atau cedera ringan.</p>
+                        <h4>3. Kompres Dingin Basah</h4>
+                        <p>Digunakan untuk mengurangi pembengkakan dan peradangan, serta membantu meredakan nyeri akibat cedera ringan.</p>
+                    </div>
+                    <div class="card">
+                        <h4>4. Kompres Dingin Kering</h4>
+                        <p>Efektif untuk penanganan awal pada nyeri akut dan kondisi tertentu yang memerlukan penekanan peradangan.</p>
                     </div>
                 </div>
             </div>
+            
+            <p style="margin-top: 30px; font-weight: 600; color: var(--primary-blue);">Seluruh tindakan dilakukan dengan memperhatikan standar kebersihan, keamanan, dan prosedur pelayanan yang berlaku.</p>
         </div>
     </section>
 
@@ -261,25 +293,51 @@
         <div class="container">
             <h2>Keunggulan Kami</h2>
             <ul class="check-list">
-                <li>Layanan langsung ke rumah pasien.</li>
-                <li>Tenaga kompeten dan profesional.</li>
-                <li>Prosedur aman dan terstandar.</li>
-                <li>Pemesanan mudah dan responsif.</li>
+                <li>Layanan kesehatan langsung ke rumah pasien</li>
+                <li>Didukung oleh tenaga yang kompeten dan profesional</li>
+                <li>Prosedur pelayanan yang aman dan terstandar</li>
+                <li>Proses pemesanan yang mudah dan responsif</li>
+                <li>Mengutamakan kenyamanan, keamanan, dan kepuasan pasien</li>
+                <li>Pelayanan yang ramah, cepat, dan terpercaya</li>
             </ul>
+        </div>
+    </section>
+
+    <section id="testimoni" class="bg-light-blue">
+        <div class="container">
+            <h2>Testimoni Pasien</h2>
+            <p class="section-subtitle">Berikut beberapa pengalaman pasien yang telah menggunakan layanan Nala Homecare:</p>
+            <div class="grid-cards">
+                <div class="card">
+                    <p>“Pelayanan sangat memuaskan. Petugas datang tepat waktu dan sangat ramah. Setelah melakukan kompres hangat, nyeri yang saya rasakan berkurang secara signifikan.”</p>
+                    <span class="author" style="display:block; margin-top:15px; font-weight:600; color:var(--secondary-blue);">— Ibu Siti, 45 tahun</span>
+                </div>
+                <div class="card">
+                    <p>“Saya merasa sangat terbantu dengan adanya layanan ini. Tidak perlu keluar rumah, tapi tetap mendapatkan perawatan yang baik dan profesional.”</p>
+                    <span class="author" style="display:block; margin-top:15px; font-weight:600; color:var(--secondary-blue);">— Bapak Andi, 52 tahun</span>
+                </div>
+                <div class="card">
+                    <p>“Pelayanannya cepat dan komunikatif. Prosesnya juga nyaman dan membuat saya lebih tenang selama perawatan.”</p>
+                    <span class="author" style="display:block; margin-top:15px; font-weight:600; color:var(--secondary-blue);">— Ibu Rina, 38 tahun</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="kontak">
         <div class="container">
-            <h2>Hubungi Kami</h2>
+            <h2>Kontak Kami</h2>
+            <p>Untuk informasi lebih lanjut dan pemesanan layanan, silakan menghubungi:</p>
             <div class="contact-info">
-                <p>📞 <strong>WA:</strong> 0897-6277-2222</p>
-                <p>📧 <strong>Email:</strong> nalahomecare@gmail.com</p>
-                <p>📍 <strong>Alamat:</strong> Jln. Cilentah No. 30, Bandung.</p>
+                <p>📞 0897-6277-2222</p>
+                <p>🌐 www.nalahomecare.com</p>
+                <p>📧 nalahomecare@gmail.com</p>
+                <p>📍 Jln. Cilentah No. 30, Kel. Burangrang, Kec. Lengkong Kota Bandung, Jawa Barat.</p>
             </div>
             <div class="footer-buttons">
-                <a href="tel:089762772222" class="footer-btn">📞 Phone</a>
+                <a href="tel:089762772222" class="footer-btn">📞 Telepon</a>
                 <a href="mailto:nalahomecare@gmail.com" class="footer-btn">📧 Email</a>
+                <a href="https://www.nalahomecare.com" class="footer-btn">🌐 Website</a>
             </div>
         </div>
     </section>
