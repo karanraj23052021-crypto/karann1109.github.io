@@ -3,247 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Catatan Harian</title>
-    <style>
-        /* === PENGATURAN DASAR === */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #e2e8f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Container utama HP */
-        .mobile-frame {
-            background-color: #ffffff;
-            width: 390px;
-            height: 844px;
-            border-radius: 40px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Container untuk masing-masing halaman */
-        .page-view {
-            padding: 40px 30px;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            transition: opacity 0.3s;
-        }
-
-        /* === HALAMAN LOGIN (CSS Lama) === */
-        .logo-container { display: flex; justify-content: center; margin-top: 40px; margin-bottom: 30px; }
-        .logo { width: 100px; height: 100px; background-color: #eff6ff; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #3b82f6; }
-        .logo svg { width: 50px; height: 50px; }
-        
-        .header-text { text-align: center; margin-bottom: 40px; }
-        .header-text h1 { font-size: 28px; font-weight: 700; color: #1e293b; margin-bottom: 10px; }
-        .header-text p { font-size: 15px; color: #64748b; line-height: 1.5; }
-
-        .form-group { margin-bottom: 20px; }
-        .form-group input { width: 100%; padding: 16px; font-size: 15px; border: 1px solid #cbd5e1; border-radius: 12px; outline: none; transition: border-color 0.3s; }
-        .form-group input:focus { border-color: #3b82f6; }
-
-        .btn-primary { width: 100%; padding: 16px; background-color: #3b82f6; color: white; font-size: 16px; font-weight: 600; border: none; border-radius: 12px; cursor: pointer; margin-top: 10px; transition: background-color 0.3s; }
-        .btn-primary:hover { background-color: #2563eb; }
-
-        /* === HALAMAN CATATAN (Fitur Baru) === */
-        #view-notes { display: none; padding: 40px 20px 20px 20px;}
-        
-        .nav-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #f1f5f9;
-        }
-        .nav-header h2 { font-size: 22px; color: #1e293b; }
-        .btn-logout { background: none; border: none; color: #ef4444; font-weight: 600; cursor: pointer; font-size: 14px;}
-        
-        .note-input-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        textarea {
-            width: 100%;
-            height: 100px;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #cbd5e1;
-            font-size: 14px;
-            resize: none;
-            outline: none;
-        }
-        textarea:focus { border-color: #3b82f6; }
-        
-        .btn-save { background-color: #10b981; padding: 12px; color: white; font-weight: bold; border: none; border-radius: 12px; cursor: pointer; }
-        .btn-save:hover { background-color: #059669; }
-
-        .notes-list-container {
-            flex-grow: 1;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding-bottom: 20px;
-        }
-        
-        /* Hilangkan scrollbar agar estetik di HP */
-        .notes-list-container::-webkit-scrollbar { display: none; }
-        
-        .note-card {
-            background-color: #f8fafc;
-            padding: 15px;
-            border-radius: 12px;
-            border-left: 4px solid #3b82f6;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            position: relative;
-        }
-        .note-card p { font-size: 14px; color: #334155; line-height: 1.4; white-space: pre-wrap; margin-bottom: 5px; }
-        .note-date { font-size: 11px; color: #94a3b8; }
-        .btn-delete { position: absolute; top: 10px; right: 10px; background: none; border: none; color: #cbd5e1; cursor: pointer; font-size: 18px; }
-        .btn-delete:hover { color: #ef4444; }
-
-    </style>
+    <title>Nala Homecare - Layanan Kesehatan di Rumah</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="mobile-frame">
-        
-        <div id="view-login" class="page-view">
-            <div class="logo-container">
-                <div class="logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-                    </svg>
-                </div>
-            </div>
+    <nav>
+        <div class="logo">Nala Homecare</div>
+        <ul class="nav-links">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#tentang">Tentang Kami</a></li>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#testimoni">Testimoni</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+    </nav>
 
-            <div class="header-text">
-                <h1>Selamat Datang</h1>
-                <p>Silakan masuk untuk menulis catatanmu.</p>
-            </div>
-
-            <form onsubmit="prosesLogin(event)">
-                <div class="form-group">
-                    <input type="email" placeholder="Alamat Email" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Kata Sandi" required>
-                </div>
-                <button type="submit" class="btn-primary">Masuk</button>
-            </form>
+    <section id="beranda" class="hero">
+        <div class="hero-content">
+            <h1>Selamat datang di Nala Homecare</h1>
+            <p>Layanan kesehatan berbasis kunjungan rumah (home care) yang hadir sebagai solusi praktis, aman, dan terpercaya. Kami mengedepankan profesionalisme dan pendekatan humanis untuk menunjang kualitas hidup Anda.</p>
+            <a href="#layanan" class="btn">Lihat Layanan Kami</a>
         </div>
+    </section>
 
-        <div id="view-notes" class="page-view">
-            <div class="nav-header">
-                <h2>Catatanku</h2>
-                <button class="btn-logout" onclick="keluar()">Keluar</button>
-            </div>
-
-            <div class="note-input-container">
-                <textarea id="noteText" placeholder="Apa yang sedang kamu pikirkan?..."></textarea>
-                <button class="btn-save" onclick="tambahCatatan()">Simpan Catatan</button>
-            </div>
-
-            <div id="notesContainer" class="notes-list-container">
-                </div>
+    <section id="tentang">
+        <div class="container">
+            <h2>Tentang Kami</h2>
+            <p>Nala Homecare adalah penyedia layanan perawatan kesehatan di rumah yang berfokus pada tindakan perawatan dasar yang aman dan efektif. Kami berupaya memberikan pelayanan yang tidak hanya berorientasi pada tindakan medis, tetapi juga memperhatikan kenyamanan, ketenangan, serta kebutuhan individu setiap pasien.</p>
+            <p>Kami percaya bahwa proses perawatan di lingkungan rumah dapat memberikan dampak positif terhadap pemulihan pasien. Oleh karena itu, layanan kami didukung oleh tenaga yang kompeten dan bertanggung jawab.</p>
         </div>
+    </section>
 
-    </div>
+    <section id="visi-misi" class="bg-light-blue">
+        <div class="container dual-col">
+            <div class="visi">
+                <h3>Visi</h3>
+                <p>Menjadi layanan home care yang terpercaya, profesional, dan berorientasi pada kualitas pelayanan kesehatan di rumah.</p>
+            </div>
+            <div class="misi">
+                <h3>Misi</h3>
+                <ul>
+                    <li>Memberikan pelayanan kesehatan yang aman, tepat, dan sesuai standar.</li>
+                    <li>Mengutamakan kenyamanan dan kepuasan pasien.</li>
+                    <li>Menyediakan layanan yang mudah diakses oleh masyarakat.</li>
+                    <li>Meningkatkan kualitas pelayanan secara berkelanjutan.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        const viewLogin = document.getElementById('view-login');
-        const viewNotes = document.getElementById('view-notes');
-        const noteText = document.getElementById('noteText');
-        const notesContainer = document.getElementById('notesContainer');
-
-        // 1. Fungsi saat tombol login ditekan
-        function prosesLogin(event) {
-            event.preventDefault(); // Mencegah reload halaman
-            viewLogin.style.display = 'none'; // Sembunyikan form login
-            viewNotes.style.display = 'flex'; // Munculkan halaman catatan
-            tampilkanCatatan(); // Tampilkan catatan yang tersimpan
-        }
-
-        // 2. Fungsi saat tombol keluar ditekan
-        function keluar() {
-            viewNotes.style.display = 'none';
-            viewLogin.style.display = 'flex';
-        }
-
-        // 3. Fungsi untuk menyimpan catatan baru
-        function tambahCatatan() {
-            const teks = noteText.value.trim();
-            if (teks === "") {
-                alert("Catatan tidak boleh kosong!");
-                return;
-            }
-
-            // Ambil waktu saat ini
-            const tanggal = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit' });
-
-            // Ambil data lama dari LocalStorage, atau buat array baru jika masih kosong
-            let daftarCatatan = JSON.parse(localStorage.getItem('dataCatatan')) || [];
+    <section id="layanan">
+        <div class="container">
+            <h2>Layanan Kami</h2>
+            <p class="section-subtitle">Kami menyediakan layanan terapi kompres yang membantu mengurangi nyeri, pembengkakan, serta peradangan dengan standar kebersihan dan keamanan.</p>
             
-            // Tambahkan catatan baru ke urutan paling atas
-            daftarCatatan.unshift({ teks: teks, waktu: tanggal });
+            <div class="grid-cards">
+                <div class="card">
+                    <h4>1. Kompres Hangat Basah</h4>
+                    <p>Membantu melancarkan peredaran darah, mengurangi kekakuan otot, serta memberikan efek relaksasi pada area tubuh tertentu.</p>
+                </div>
+                <div class="card">
+                    <h4>2. Kompres Hangat Kering</h4>
+                    <p>Berfungsi untuk meredakan ketegangan otot dan memberikan kenyamanan, terutama pada kondisi nyeri ringan hingga sedang.</p>
+                </div>
+                <div class="card">
+                    <h4>3. Kompres Dingin Basah</h4>
+                    <p>Digunakan untuk mengurangi pembengkakan dan peradangan, serta membantu meredakan nyeri akibat cedera ringan.</p>
+                </div>
+                <div class="card">
+                    <h4>4. Kompres Dingin Kering</h4>
+                    <p>Efektif untuk penanganan awal pada nyeri akut dan kondisi tertentu yang memerlukan penekanan peradangan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Simpan kembali ke LocalStorage
-            localStorage.setItem('dataCatatan', JSON.stringify(daftarCatatan));
+    <section id="keunggulan" class="bg-primary-blue text-white">
+        <div class="container">
+            <h2>Keunggulan Kami</h2>
+            <ul class="check-list">
+                <li>Layanan kesehatan langsung ke rumah pasien.</li>
+                <li>Didukung oleh tenaga yang kompeten dan profesional.</li>
+                <li>Prosedur pelayanan yang aman dan terstandar.</li>
+                <li>Proses pemesanan yang mudah dan responsif.</li>
+                <li>Mengutamakan kenyamanan, keamanan, dan kepuasan pasien.</li>
+                <li>Pelayanan yang ramah, cepat, dan terpercaya.</li>
+            </ul>
+        </div>
+    </section>
 
-            noteText.value = ""; // Kosongkan form input
-            tampilkanCatatan(); // Refresh tampilan daftar catatan
-        }
+    <section id="testimoni" class="bg-light-blue">
+        <div class="container">
+            <h2>Testimoni Pasien</h2>
+            <div class="grid-cards">
+                <div class="card">
+                    <p>“Pelayanan sangat memuaskan. Petugas datang tepat waktu dan ramah. Setelah kompres hangat, nyeri berkurang signifikan.”</p>
+                    <span class="author">— Ibu Siti, 45 tahun</span>
+                </div>
+                <div class="card">
+                    <p>“Sangat terbantu. Tidak perlu keluar rumah, tapi tetap mendapatkan perawatan yang baik dan profesional.”</p>
+                    <span class="author">— Bapak Andi, 52 tahun</span>
+                </div>
+                <div class="card">
+                    <p>“Pelayanannya cepat dan komunikatif. Prosesnya juga nyaman dan membuat saya lebih tenang selama perawatan.”</p>
+                    <span class="author">— Ibu Rina, 38 tahun</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        // 4. Fungsi untuk memunculkan catatan ke layar
-        function tampilkanCatatan() {
-            // Bersihkan container dulu
-            notesContainer.innerHTML = "";
-            
-            let daftarCatatan = JSON.parse(localStorage.getItem('dataCatatan')) || [];
+    <section id="kontak">
+        <div class="container">
+            <h2>Hubungi Kami</h2>
+            <p>Untuk informasi lebih lanjut dan pemesanan layanan, silakan hubungi kami melalui:</p>
+            <div class="contact-info">
+                <p>📞 <strong>Telepon/WA:</strong> 0897-6277-2222</p>
+                <p>🌐 <strong>Website:</strong> www.nalahomecare.com</p>
+                <p>📧 <strong>Email:</strong> nalahomecare@gmail.com</p>
+                <p>📍 <strong>Alamat:</strong> Jln. Cilentah No. 30, Kel. Burangrang, Kec. Lengkong Kota Bandung, Jawa Barat.</p>
+            </div>
+        </div>
+    </section>
 
-            if(daftarCatatan.length === 0) {
-                notesContainer.innerHTML = '<p style="text-align:center; color:#94a3b8; font-size:14px; margin-top:20px;">Belum ada catatan. Buat yang pertama!</p>';
-                return;
-            }
-
-            // Looping dan buat elemen HTML untuk setiap catatan
-            daftarCatatan.forEach((catatan, index) => {
-                const card = document.createElement('div');
-                card.className = 'note-card';
-                card.innerHTML = `
-                    <p>${catatan.teks}</p>
-                    <span class="note-date">${catatan.waktu}</span>
-                    <button class="btn-delete" onclick="hapusCatatan(${index})">&times;</button>
-                `;
-                notesContainer.appendChild(card);
-            });
-        }
-
-        // 5. Fungsi untuk menghapus catatan
-        function hapusCatatan(index) {
-            let daftarCatatan = JSON.parse(localStorage.getItem('dataCatatan')) || [];
-            daftarCatatan.splice(index, 1); // Hapus 1 item sesuai urutan (index)
-            localStorage.setItem('dataCatatan', JSON.stringify(daftarCatatan)); // Simpan data terbaru
-            tampilkanCatatan(); // Refresh layar
-        }
-    </script>
+    <footer>
+        <p>&copy; 2026 Nala Homecare. All Rights Reserved.</p>
+    </footer>
 
 </body>
 </html>
