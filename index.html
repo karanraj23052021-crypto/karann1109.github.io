@@ -23,11 +23,13 @@
             --text-dark: #333333;
             --text-light: #666666;
             --white: #ffffff;
+            --light-green: #e9f7ef; /* Hijau muda untuk kartu hero */
         }
 
         body {
             color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
@@ -84,25 +86,36 @@
             color: var(--secondary-blue);
         }
 
-        /* Hero Section */
+        /* Hero Section (Diperbarui dengan Gambar Latar) */
         .hero {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            background-image: linear-gradient(135deg, rgba(0, 86, 179, 0.9) 0%, rgba(0, 123, 255, 0.9) 100%), url('image_2.png');
+            background-size: cover;
+            background-position: center;
             color: var(--white);
             padding: 100px 20px;
             text-align: center;
+            position: relative;
         }
 
-        .hero-content {
+        /* Kartu Hero Hijau Muda (Sama seperti contoh) */
+        .hero-card {
+            background-color: var(--light-green);
+            color: var(--text-dark);
             max-width: 800px;
             margin: 0 auto;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .hero h1 {
+            color: var(--primary-blue);
             font-size: 2.8rem;
             margin-bottom: 20px;
         }
 
         .hero p {
+            color: var(--text-light);
             font-size: 1.1rem;
             margin-bottom: 30px;
         }
@@ -110,8 +123,8 @@
         .btn {
             display: inline-block;
             padding: 12px 30px;
-            background-color: var(--white);
-            color: var(--primary-blue);
+            background-color: var(--primary-blue);
+            color: var(--white);
             text-decoration: none;
             border-radius: 25px;
             font-weight: 700;
@@ -119,7 +132,7 @@
         }
 
         .btn:hover {
-            background-color: var(--light-blue);
+            background-color: var(--secondary-blue);
         }
 
         /* Backgrounds */
@@ -131,7 +144,7 @@
             background-color: var(--primary-blue);
         }
 
-        .text-white h2, .text-white p, .text-white li {
+        .text-white h2, .text-white p, .text-white li, .text-white h3 {
             color: var(--white);
         }
 
@@ -159,7 +172,59 @@
             padding-left: 20px;
         }
 
-        /* Cards (Layanan & Testimoni) */
+        /* Bagian Tentang Kami (Diperbarui dengan Gambar Gelembung) */
+        .about-row {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            text-align: left;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            max-width: 500px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Bagian Gelembung Baru (antara Visi Misi dan Layanan) */
+        .grid-bubbles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .bubble {
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .bubble:hover {
+            transform: scale(1.05);
+        }
+
+        .bubble img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Kartu (Testimoni) - Bagian Layanan Diperbarui */
         .grid-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -190,6 +255,34 @@
             margin-top: 15px;
             font-weight: 600;
             color: var(--secondary-blue);
+        }
+
+        /* Tata Letak Layanan Baru dengan Gambar */
+        .service-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .service-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .service-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .service-image img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         /* Keunggulan List */
@@ -230,7 +323,32 @@
             margin-bottom: 10px;
         }
 
-        /* Footer */
+        /* Footer Tombol Baru (Sama seperti contoh) */
+        .footer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .footer-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .footer-btn:hover {
+            background-color: var(--secondary-blue);
+        }
+
+        /* Footer Asli */
         footer {
             background-color: var(--text-dark);
             color: var(--white);
@@ -249,11 +367,42 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            .dual-col {
-                flex-direction: column;
+            .hero-card {
+                padding: 20px;
             }
             .hero h1 {
                 font-size: 2rem;
+            }
+            .about-row {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-image {
+                margin-top: 20px;
+                order: -1;
+            }
+            .grid-bubbles {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            .bubble:last-child {
+                grid-column: span 2;
+                max-width: 200px;
+                margin: 0 auto;
+            }
+            .service-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            .service-image {
+                margin-top: 20px;
+            }
+            .dual-col {
+                flex-direction: column;
+            }
+            .footer-buttons {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -272,7 +421,7 @@
     </nav>
 
     <section id="beranda" class="hero">
-        <div class="hero-content">
+        <div class="hero-card">
             <h1>Selamat datang di Nala Homecare</h1>
             <p>Layanan kesehatan berbasis kunjungan rumah (home care) yang hadir sebagai solusi praktis, aman, dan terpercaya. Kami mengedepankan profesionalisme dan pendekatan humanis untuk menunjang kualitas hidup Anda.</p>
             <a href="#layanan" class="btn">Lihat Layanan Kami</a>
@@ -280,11 +429,16 @@
     </section>
 
     <section id="tentang">
-        <div class="container">
-            <h2>Tentang Kami</h2>
-            <p>Nala Homecare adalah penyedia layanan perawatan kesehatan di rumah yang berfokus pada tindakan perawatan dasar yang aman dan efektif. Kami berupaya memberikan pelayanan yang tidak hanya berorientasi pada tindakan medis, tetapi juga memperhatikan kenyamanan, ketenangan, serta kebutuhan individu setiap pasien.</p>
-            <br>
-            <p>Kami percaya bahwa proses perawatan di lingkungan rumah dapat memberikan dampak positif terhadap pemulihan pasien. Oleh karena itu, layanan kami didukung oleh tenaga yang kompeten dan bertanggung jawab.</p>
+        <div class="container about-row">
+            <div class="about-text">
+                <h2>Tentang Kami</h2>
+                <p>Nala Homecare adalah penyedia layanan perawatan kesehatan di rumah yang berfokus pada tindakan perawatan dasar yang aman dan efektif. Kami berupaya memberikan pelayanan yang tidak hanya berorientasi pada tindakan medis, tetapi juga memperhatikan kenyamanan, ketenangan, serta kebutuhan individu setiap pasien.</p>
+                <br>
+                <p>Kami percaya bahwa proses perawatan di lingkungan rumah dapat memberikan dampak positif terhadap pemulihan pasien. Oleh karena itu, layanan kami didukung oleh tenaga yang kompeten dan bertanggung jawab.</p>
+            </div>
+            <div class="about-image">
+                <img src="image_4.png" alt="Perawat memeluk lansia">
+            </div>
         </div>
     </section>
 
@@ -306,27 +460,49 @@
         </div>
     </section>
 
+    <section id="gelembung" class="bg-primary-blue text-white">
+        <div class="container">
+            <h3>Tim Kompeten dan Penuh Kasih Sayang</h3>
+            <p>Tenaga profesional kami berkomitmen memberikan perawatan terbaik di kenyamanan rumah Anda.</p>
+            <div class="grid-bubbles">
+                <div class="bubble"><img src="image_3.png" alt="Perawat berlutut dan Lansia"></div>
+                <div class="bubble"><img src="image_2.png" alt="Perawat berdiri dan Lansia tersenyum"></div>
+                <div class="bubble"><img src="image_7.png" alt="Tangan memegang termometer"></div>
+            </div>
+        </div>
+    </section>
+
     <section id="layanan">
         <div class="container">
             <h2>Layanan Kami</h2>
             <p class="section-subtitle">Kami menyediakan layanan terapi kompres yang membantu mengurangi nyeri, pembengkakan, serta peradangan dengan standar kebersihan dan keamanan.</p>
             
-            <div class="grid-cards">
-                <div class="card">
-                    <h4>1. Kompres Hangat Basah</h4>
-                    <p>Membantu melancarkan peredaran darah, mengurangi kekakuan otot, serta memberikan efek relaksasi pada area tubuh tertentu.</p>
+            <div class="service-row">
+                <div class="service-group">
+                    <div class="card">
+                        <h4>1. Kompres Hangat Basah</h4>
+                        <p>Membantu melancarkan peredaran darah, mengurangi kekakuan otot, serta memberikan efek relaksasi pada area tubuh tertentu.</p>
+                    </div>
+                    <div class="card">
+                        <h4>2. Kompres Hangat Kering</h4>
+                        <p>Berfungsi untuk meredakan ketegangan otot dan memberikan kenyamanan, terutama pada kondisi nyeri ringan hingga sedang.</p>
+                    </div>
+                    <div class="service-image">
+                        <img src="image_5.png" alt="Pria dengan kompres dan termometer">
+                    </div>
                 </div>
-                <div class="card">
-                    <h4>2. Kompres Hangat Kering</h4>
-                    <p>Berfungsi untuk meredakan ketegangan otot dan memberikan kenyamanan, terutama pada kondisi nyeri ringan hingga sedang.</p>
-                </div>
-                <div class="card">
-                    <h4>3. Kompres Dingin Basah</h4>
-                    <p>Digunakan untuk mengurangi pembengkakan dan peradangan, serta membantu meredakan nyeri akibat cedera ringan.</p>
-                </div>
-                <div class="card">
-                    <h4>4. Kompres Dingin Kering</h4>
-                    <p>Efektif untuk penanganan awal pada nyeri akut dan kondisi tertentu yang memerlukan penekanan peradangan.</p>
+                <div class="service-group">
+                    <div class="service-image">
+                        <img src="image_6.png" alt="Anak dengan kompres dan termometer">
+                    </div>
+                    <div class="card">
+                        <h4>3. Kompres Dingin Basah</h4>
+                        <p>Digunakan untuk mengurangi pembengkakan dan peradangan, serta membantu meredakan nyeri akibat cedera ringan.</p>
+                    </div>
+                    <div class="card">
+                        <h4>4. Kompres Dingin Kering</h4>
+                        <p>Efektif untuk penanganan awal pada nyeri akut dan kondisi tertentu yang memerlukan penekanan peradangan.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -375,6 +551,11 @@
                 <p>🌐 <strong>Website:</strong> www.nalahomecare.com</p>
                 <p>📧 <strong>Email:</strong> nalahomecare@gmail.com</p>
                 <p>📍 <strong>Alamat:</strong> Jln. Cilentah No. 30, Kel. Burangrang, Kec. Lengkong Kota Bandung, Jawa Barat.</p>
+            </div>
+            <div class="footer-buttons">
+                <a href="tel:089762772222" class="footer-btn">📞 Phone</a>
+                <a href="mailto:nalahomecare@gmail.com" class="footer-btn">📧 Email</a>
+                <a href="https://facebook.com" class="footer-btn">👥 Facebook</a>
             </div>
         </div>
     </section>
