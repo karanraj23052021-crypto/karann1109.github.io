@@ -32,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        /* --- CSS TAMBAHAN UNTUK HALAMAN PEMBUKA (SPLASH SCREEN) --- */
+        /* --- CSS BARU UNTUK HALAMAN PEMBUKA (EKSKLUSIF BIRU & MELAYANG) --- */
         body.no-scroll {
             overflow: hidden; /* Mengunci scroll saat di halaman pembuka */
         }
@@ -43,17 +43,20 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+            /* Latar belakang gradasi biru premium */
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #002244 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+            /* Animasi meluncur ke atas seperti tirai */
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
         }
 
         #splash-screen.hidden {
+            transform: translateY(-100%);
             opacity: 0;
-            visibility: hidden;
+            pointer-events: none;
         }
 
         .splash-content {
@@ -65,30 +68,35 @@
             max-width: 80vw;
             cursor: pointer;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            animation: pulseLogo 2s infinite;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            /* Animasi melayang yang elegan */
+            animation: floatLogo 3s ease-in-out infinite;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Efek saat logo disorot mouse (hover) */
+        .splash-content img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 45px rgba(255, 255, 255, 0.2);
+            animation-play-state: paused;
         }
 
         .splash-text {
-            margin-top: 20px;
-            color: var(--primary-blue);
+            margin-top: 25px;
+            color: var(--white);
             font-weight: 600;
-            font-size: 1.2rem;
-            animation: pulseText 2s infinite;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            opacity: 0.9;
         }
 
-        @keyframes pulseLogo {
-            0% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-            50% { transform: scale(1.05); box-shadow: 0 15px 40px rgba(0, 86, 179, 0.4); }
-            100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        /* Animasi kunci untuk efek melayang */
+        @keyframes floatLogo {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0); }
         }
-
-        @keyframes pulseText {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
-        }
-        /* --- BATAS CSS TAMBAHAN --- */
+        /* --- BATAS CSS HALAMAN PEMBUKA --- */
 
         .container {
             max-width: 1100px;
@@ -378,7 +386,7 @@
                     <span class="author" style="display:block; margin-top:15px; font-weight:600; color:var(--secondary-blue);">— Ibu Siti, 45 tahun</span>
                 </div>
                 <div class="card">
-                    <p>“Saya merasa sangat terbantu dengan adanya layanan ini. Tidak perlu keluar rumah, tapi tetap mendapatkan perawatan yang baik dan profesional.”</p>
+                    <p>“Saya merasa sangat terbantu dengan adanya layanan ini. Tidak perlu keluar rumah, tapi tetap mendapatkan perawatan yang baik yang profesional.”</p>
                     <span class="author" style="display:block; margin-top:15px; font-weight:600; color:var(--secondary-blue);">— Bapak Andi, 52 tahun</span>
                 </div>
                 <div class="card">
@@ -413,9 +421,9 @@
 
     <script>
         document.getElementById('btn-masuk').addEventListener('click', function() {
-            // Menghilangkan layar putih
+            // Memberikan efek meluncur ke atas (seperti tirai) pada layar biru
             document.getElementById('splash-screen').classList.add('hidden');
-            // Membuka kunci scroll agar website bisa digeser ke bawah
+            // Membuka kunci scroll agar website bisa digeser
             document.body.classList.remove('no-scroll');
         });
     </script>
