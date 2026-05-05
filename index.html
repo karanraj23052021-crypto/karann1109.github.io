@@ -32,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        /* --- CSS BARU UNTUK HALAMAN PEMBUKA (EKSKLUSIF BIRU & MELAYANG) --- */
+        /* --- CSS HALAMAN PEMBUKA (ULTRA SMOOTH REFINED VERSION) --- */
         body.no-scroll {
             overflow: hidden; /* Mengunci scroll saat di halaman pembuka */
         }
@@ -44,17 +44,19 @@
             width: 100vw;
             height: 100vh;
             /* Latar belakang gradasi biru premium */
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #002244 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #001a33 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            /* Animasi meluncur ke atas seperti tirai */
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+            /* Transition yang disempurnakan: transformasi ke atas dan memudar */
+            transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1), opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity; /* Optimalisasi untuk browser */
         }
 
-        #splash-screen.hidden {
-            transform: translateY(-100%);
+        /* State ketika layar ditekan (Transisi Keluar) */
+        #splash-screen.entered {
+            transform: translateY(-110%); /* Meluncur ke atas lebih jauh agar bersih */
             opacity: 0;
             pointer-events: none;
         }
@@ -65,36 +67,44 @@
 
         .splash-content img {
             width: 250px;
-            max-width: 80vw;
+            max-width: 75vw;
             cursor: pointer;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            /* Animasi melayang yang elegan */
-            animation: floatLogo 3s ease-in-out infinite;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            /* Animasi melayang yang lebih dihaluskan */
+            animation: floatLogoRefined 3.5s ease-in-out infinite;
+            /* Transisi untuk efek sorotan (hover) dan klik */
+            transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.4s ease, opacity 0.4s ease;
+            will-change: transform;
         }
 
-        /* Efek saat logo disorot mouse (hover) */
+        /* Efek saat logo disorot (hover) - Di HP efek ini muncul saat disentuh tapi sebelum dilepas */
         .splash-content img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 45px rgba(255, 255, 255, 0.2);
-            animation-play-state: paused;
+            transform: scale(1.03); /* Membesar sedikit saja agar elegan */
+            box-shadow: 0 20px 45px rgba(255, 255, 255, 0.15);
         }
 
+        /* Teks petunjuk halus di bawah logo */
         .splash-text {
             margin-top: 25px;
-            color: var(--white);
+            color: rgba(255, 255, 255, 0.85);
             font-weight: 600;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            opacity: 0.9;
+            font-size: 1.05rem;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            animation: fadeInText 1s ease-out 0.5s both; /* Muncul sedikit lebih lambat dari logo */
         }
 
-        /* Animasi kunci untuk efek melayang */
-        @keyframes floatLogo {
+        /* Animasi melayang Refined: Pergerakan lebih sedikit agar premium */
+        @keyframes floatLogoRefined {
             0% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-9px); }
             100% { transform: translateY(0); }
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         /* --- BATAS CSS HALAMAN PEMBUKA --- */
 
@@ -170,7 +180,7 @@
             margin: 0 auto;
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15 rgba(0,0,0,0.2);
         }
 
         .hero h1 {
@@ -421,10 +431,26 @@
 
     <script>
         document.getElementById('btn-masuk').addEventListener('click', function() {
-            // Memberikan efek meluncur ke atas (seperti tirai) pada layar biru
-            document.getElementById('splash-screen').classList.add('hidden');
-            // Membuka kunci scroll agar website bisa digeser
-            document.body.classList.remove('no-scroll');
+            var splash = document.getElementById('splash-screen');
+            var logo = document.getElementById('btn-masuk');
+
+            // 1. Berikan umpan balik klik instan pada logo (mengecil sedikit)
+            logo.style.transform = 'scale(0.96)';
+            logo.style.opacity = '0.7';
+
+            // 2. Mulai animasi transisi layar setelah jeda sangat singkat
+            setTimeout(function() {
+                // Memberikan efek meluncur ke atas yang ultra smooth pada layar biru
+                splash.classList.add('entered');
+                // Membuka kunci scroll pada body utama agar website bisa digeser
+                document.body.classList.remove('no-scroll');
+            }, 150); // Jeda 0.15 detik untuk efek klik
+
+            // 3. Cleanup Bug: Hapus elemen Splash Screen sepenuhnya dari DOM setelah animasi selesai (1.2 detik di CSS)
+            // Ini menjamin tidak akan ada bug "layar transparan menutupi tombol" di HP lawas.
+            setTimeout(function() {
+                splash.parentNode.removeChild(splash);
+            }, 1400); // 1.2s durasi animasi + jeda klik
         });
     </script>
 
