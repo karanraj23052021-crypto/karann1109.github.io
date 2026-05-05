@@ -32,6 +32,64 @@
             overflow-x: hidden;
         }
 
+        /* --- CSS TAMBAHAN UNTUK HALAMAN PEMBUKA (SPLASH SCREEN) --- */
+        body.no-scroll {
+            overflow: hidden; /* Mengunci scroll saat di halaman pembuka */
+        }
+
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--white) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+        }
+
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .splash-content {
+            text-align: center;
+        }
+
+        .splash-content img {
+            width: 250px;
+            max-width: 80vw;
+            cursor: pointer;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            animation: pulseLogo 2s infinite;
+        }
+
+        .splash-text {
+            margin-top: 20px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 1.2rem;
+            animation: pulseText 2s infinite;
+        }
+
+        @keyframes pulseLogo {
+            0% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+            50% { transform: scale(1.05); box-shadow: 0 15px 40px rgba(0, 86, 179, 0.4); }
+            100% { transform: scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        }
+
+        @keyframes pulseText {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        /* --- BATAS CSS TAMBAHAN --- */
+
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -187,7 +245,14 @@
         }
     </style>
 </head>
-<body>
+<body class="no-scroll">
+
+    <div id="splash-screen">
+        <div class="splash-content">
+            <img src="IMG-20260309-WA0036.jpg" alt="Logo Masuk Nala Homecare" id="btn-masuk">
+            <p class="splash-text">Ketuk Logo Untuk Masuk</p>
+        </div>
+    </div>
 
     <nav>
         <div class="logo">Nala Homecare</div>
@@ -345,6 +410,15 @@
     <footer>
         <p>&copy; 2026 Nala Homecare. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        document.getElementById('btn-masuk').addEventListener('click', function() {
+            // Menghilangkan layar putih
+            document.getElementById('splash-screen').classList.add('hidden');
+            // Membuka kunci scroll agar website bisa digeser ke bawah
+            document.body.classList.remove('no-scroll');
+        });
+    </script>
 
 </body>
 </html>
